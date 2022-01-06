@@ -1,1 +1,196 @@
+#include<iostream>
+using namespace std;
 
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+struct Node *head;
+
+void insert_begining(int data)
+{
+    struct Node *new_node = (struct Node*) malloc(sizeof(struct Node));
+    new_node->data = data;
+    new_node->next=head;
+    head = new_node;
+}
+void insert_end(int data)
+{
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+    new_node->data = data;
+    if (head == NULL)
+    {
+        new_node->next = NULL;
+        head = new_node;
+    }
+    else
+    {
+        struct Node *ptr=head;
+        while(ptr->next!=NULL)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = new_node;
+        new_node->next=NULL;
+    }
+}
+void insert_after(int data, int x)
+{
+    if (head == NULL)
+    {
+        cout<<"Empty linked list\n"<<endl;
+    }
+    else
+    {
+        struct Node* ptr1=head;
+        struct Node* ptr2 = head->next;
+        while(ptr1->data != x)
+        {
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
+        }
+        if (ptr1->data == x)
+        {
+            struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+            new_node->data = data;
+            ptr1->next = new_node;
+            new_node->next = ptr2;
+            cout<<"Inserted successfully..\n"<<endl;
+        }
+        else{
+            cout<<"Element is not found"<<endl;
+        }
+
+    }
+}
+void delete_beg()
+{
+    if (head == NULL){
+        cout<<"Linked list is empty"<<endl;
+    }
+    else{
+        struct Node* ptr = head->next;
+        head->next = NULL;
+        free(head);
+        head = ptr;
+        cout<<"Deleted successfully"<<endl;
+    }
+}
+void delete_end()
+{
+    if (head == NULL){
+        cout<<"Linked list is empty"<<endl;
+    }
+    else{
+        struct Node* ptr1 = head;
+        struct Node* ptr2 = head->next;
+        while(ptr2->next != NULL)
+        {
+            ptr1=ptr1->next;
+            ptr2=ptr2->next;
+        }
+        ptr1->next=NULL;
+        cout<<"Deleted successfully"<<endl;
+    }
+}
+void delete_after(int x)
+{
+    if (head == NULL){
+        cout<<"Linked list is empty"<<endl;
+    }
+    else{
+        struct Node* ptr1 = head;
+        struct Node* ptr2 = head->next;
+        struct Node* ptr3 = ptr2->next;
+        while (ptr2->data != x){
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
+            ptr3 = ptr3->next;
+        }
+        ptr1->next = NULL;
+        ptr2->next = NULL;
+        ptr1->next = ptr3;
+        cout<<"deleted successfully"<<endl;
+
+    }
+}
+void display()
+{
+    struct Node *ptr = head;
+    while(ptr!=NULL)
+    {
+        cout<<ptr->data<<"  ";
+        ptr=ptr->next;
+    }
+    cout<<"\n";
+}
+int main()
+{
+    int n = 0;
+    while(n != 8)
+    {
+        cout<<"===SELECT ANY ONE===\n1 for insert at beggining\n2 for inset at end\n3 for insert at random position"<<endl;
+        cout<<"4 delete from beggining\n5 delete from end\n6 delete any element\n7 display"<<endl;
+        cout<<"8 exit"<<endl;
+        cin>>n;
+        switch(n)
+        {
+        case 1:
+            {
+                int a;
+                cout<<"Enter element to be inserted: ";
+                cin>>a;
+                insert_begining(a);
+                cout<<"Inserted successfully..\n"<<endl;
+                break;
+            }
+        case 2:
+            {
+                int a;
+                cout<<"Enter the element to be inserted: ";
+                cin>>a;
+                insert_end(a);
+                cout<<"Inserted successfully..\n"<<endl;
+                break;
+            }
+        case 3:
+            {
+                int a,x;
+                cout<<"Enter the element to be inserted: ";
+                cin>>a;
+                cout<<"Enter the element after which you want to insert: ";
+                cin>>x;
+                insert_after(a,x);
+                break;
+            }
+        case 4:
+            {
+                delete_beg();
+                break;
+            }
+        case 5:
+            {
+                delete_end();
+                break;
+            }
+        case 6:
+            {
+                int x;
+                cout<<"Enter the element to be deleted: ";
+                cin>>x;
+                delete_after(x);
+                break;
+            }
+        case 7:
+            display();
+            break;
+        case 8:
+            break;
+        default:
+            cout<<"Enter the valid number"<<endl;
+        }
+    }
+
+    return 0;
+}
