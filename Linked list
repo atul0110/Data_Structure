@@ -333,6 +333,30 @@ void delete_element(int data)
     }
 }
 
+void search_element(int data)
+{
+    if(head == NULL){
+        cout<<"List is empty..\n"<<endl;
+    }
+    else{
+        struct Node* ptr = head;
+        int i=1;
+        while(ptr->data!=data){
+            ptr = ptr->next;
+            i=i+1;
+            if(ptr->next == head){
+                break;
+            }
+        }
+        if(ptr->data == data){
+            cout<<"Element found at "<<i<<" position\n"<<endl;
+        }
+        else{
+            cout<<"Element not found.\n"<<endl;
+        }
+    }
+}
+
 void display()
 {
     struct Node* ptr = head;
@@ -347,11 +371,11 @@ void display()
 int main()
 {
     int n = 0;
-    while(n!=8)
+    while(n!=9)
     {
         cout<<"===SELECT ANY ONE==="<<endl;
         cout<<"1 for insert at beggining\n2 for insert at end\n3 for insert at any position"<<endl;
-        cout<<"4 for delete from beggining\n5 for delete from end\n6 for delete any element\n7 display\n8 exit"<<endl;
+        cout<<"4 for delete from beggining\n5 for delete from end\n6 for delete any element\n7 search an element\n8 display\n9 exit"<<endl;
         cout<<"Enter your choice: ";
         cin>>n;
         switch(n)
@@ -402,10 +426,18 @@ int main()
             }
         case 7:
             {
-                display();
+                int data;
+                cout<<"Enter the element to be search: ";
+                cin>>data;
+                search_element(data);
                 break;
             }
         case 8:
+            {
+                display();
+                break;
+            }
+        case 9:
             break;
         default:
             cout<<"invalid number"<<endl;
