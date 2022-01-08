@@ -197,3 +197,220 @@ int main()
 
     return 0;
 }
+
+
+/****************************************************************************************************************************************************************
+//CIRCULAR LINKED LIST
+****************************************************************************************************************************************************************/
+
+
+#include<iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+struct Node* end_ptr = NULL;
+
+void insert_beggining(int data)
+{
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+    new_node->data = data;
+
+    if (head == NULL){
+        head = new_node;
+        new_node->next = head;
+        end_ptr = new_node;
+        cout<<"Element inserted..\n"<<endl;
+    }
+    else{
+        new_node->next = head;
+        head = new_node;
+        end_ptr->next = new_node;
+        cout<<"Element inserted..\n"<<endl;
+    }
+}
+
+void insert_end(int data)
+{
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+    new_node->data = data;
+    if (head == NULL){
+        new_node->next = new_node;
+        head = new_node;
+        end_ptr = new_node;
+        cout<<"Element inserted..\n"<<endl;
+    }
+    else{
+        new_node->next = head;
+        end_ptr->next = new_node;
+        end_ptr = new_node;
+        cout<<"Element inserted..\n"<<endl;
+    }
+}
+
+void insert_after(int x,int data)
+{
+    struct Node* ptr = head;
+    while(ptr->data!=x){
+        ptr = ptr->next;
+        if(ptr->next == head){
+            break;
+        }
+        if(ptr->data == x){
+            struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+            new_node->data = data;
+            new_node->next = ptr->next;
+            ptr->next = new_node;
+            cout<<"Element inserted..\n"<<endl;
+        }
+        else{
+            cout<<"Element not found.\n"<<endl;
+        }
+    }
+}
+
+void delete_beggining()
+{
+    if(head == NULL){
+        cout<<"Nothing to delete..\n"<<endl;
+    }
+    else{
+        struct Node* ptr = head->next;
+        head->next = NULL;
+        free(head);
+        head = ptr;
+        end_ptr->next = head;
+        cout<<"Element deleted..\n"<<endl;
+    }
+}
+
+void delete_end()
+{
+    if(head == NULL){
+        cout<<"Nothing to delete..\n"<<endl;
+    }
+    else{
+        struct Node* ptr = head;
+        while(ptr->next!=end_ptr){
+            ptr = ptr->next;
+        }
+        end_ptr->next = NULL;
+        ptr->next = head;
+        free(end_ptr);
+        end_ptr = ptr;
+        cout<<"Element deleted..\n"<<endl;
+    }
+}
+
+void delete_element(int data)
+{
+    if(head == NULL){
+        cout<<"Nothing to delete..\n"<<endl;
+    }
+    else{
+        struct Node* ptr = head;
+        struct Node* ptr1 = head->next;
+        while(ptr1->data!=data){
+            ptr1=ptr1->next;
+            ptr = ptr->next;
+            if(ptr1->next == head){
+                break;
+            }
+        }
+        if(ptr1->data == data){
+            ptr->next = ptr1->next;
+            ptr1->next = NULL;
+            cout<<"Element deleted..\n"<<endl;
+        }
+        else{
+            cout<<"Element not found..\n"<<endl;
+        }
+    }
+}
+
+void display()
+{
+    struct Node* ptr = head;
+    while(ptr->next!=head){
+        cout<<ptr->data<<"\t";
+        ptr = ptr->next;
+    }
+    cout<<ptr->data<<endl;
+    cout<<"\n"<<endl;
+}
+
+int main()
+{
+    int n = 0;
+    while(n!=8)
+    {
+        cout<<"===SELECT ANY ONE==="<<endl;
+        cout<<"1 for insert at beggining\n2 for insert at end\n3 for insert at any position"<<endl;
+        cout<<"4 for delete from beggining\n5 for delete from end\n6 for delete any element\n7 display\n8 exit"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>n;
+        switch(n)
+        {
+        case 1:
+            {
+                int x;
+                cout<<"Enter the element to be inserted: ";
+                cin>>x;
+                insert_beggining(x);
+                break;
+            }
+        case 2:
+            {
+                int x;
+                cout<<"Enter the element to be inserted: ";
+                cin>>x;
+                insert_end(x);
+                break;
+            }
+        case 3:
+            {
+                int x,data;
+                cout<<"Enter the element to be inserted: ";
+                cin>>data;
+                cout<<"Enter the element after which you want to insert new element: ";
+                cin>>x;
+                insert_after(x,data);
+                break;
+            }
+        case 4:
+            {
+                delete_beggining();
+                break;
+            }
+        case 5:
+            {
+                delete_end();
+                break;
+            }
+        case 6:
+            {
+                int data;
+                cout<<"Enter the element to be deleted: ";
+                cin>>data;
+                delete_element(data);
+                break;
+            }
+        case 7:
+            {
+                display();
+                break;
+            }
+        case 8:
+            break;
+        default:
+            cout<<"invalid number"<<endl;
+
+        }
+    }
+    return 0;
+}
