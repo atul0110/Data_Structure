@@ -164,3 +164,104 @@ int main()
 
     return 0;
 }
+
+
+/*****************************************************************************************************************************************
+//STACK USING LINKED LIST
+*****************************************************************************************************************************************/
+
+
+#include<iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+
+void push()
+{
+    struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+    if(new_node==NULL){
+        cout<<"Not able to push an element\n"<<endl;
+    }
+    else{
+        int data;
+        cout<<"Enter an element: ";
+        cin>>data;
+        new_node->data = data;
+        new_node->next = head;
+        head = new_node;
+        cout<<"Element pushed..\n"<<endl;
+    }
+}
+
+void pop()
+{
+    if(head==NULL){
+        cout<<"Stack underflow..\n"<<endl;
+    }
+    else{
+        struct Node* ptr = head;
+        head = head->next;
+        ptr->next = NULL;
+        free(ptr);
+        cout<<"Element poped\n"<<endl;
+    }
+}
+
+void display()
+{
+    struct Node* ptr = head;
+    if(head==NULL){
+        cout<<"Stack is empty\n"<<endl;
+    }
+    else{
+        cout<<"Stack is:"<<endl;
+        while(ptr!=NULL){
+            cout<<ptr->data<<endl;
+            ptr = ptr->next;
+        }
+    }
+    cout<<"\n"<<endl;
+}
+
+int main()
+{
+    int n=0;
+    while(n!=4)
+    {
+        cout<<"=== CHOOSE ANY ONE ==="<<endl;
+        cout<<"1: push\n2: pop\n3: display\n4: exit"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>n;
+        switch(n)
+        {
+        case 1:
+            {
+                push();
+                break;
+            }
+        case 2:
+            {
+                pop();
+                break;
+            }
+        case 3:
+            {
+                display();
+                break;
+            }
+        case 4:
+            {
+                break;
+            }
+        default:
+            cout<<"Invalid input\n"<<endl;
+        }
+    }
+    return 0;
+}
