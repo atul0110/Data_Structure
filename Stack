@@ -1,1 +1,166 @@
+/*****************************************************************************************************************************************
+//STACK USING ARRAY
+*****************************************************************************************************************************************/
 
+#include<iostream>
+using namespace std;
+
+int my_stack[100],top=-1;
+
+int push(int top)
+{
+    int data;
+    cout<<"Enter the element to be inserted in the stack: ";
+    cin>>data;
+    my_stack[top] = data;
+    cout<<"Element inserted..\n"<<endl;
+}
+
+void pop()
+{
+    if(top == -1){
+        cout<<"Stack underflow\n"<<endl;
+    }
+    else{
+        top = top-1;
+        cout<<"Element poped..\n"<<endl;
+    }
+}
+
+void peek(int x)
+{
+    if(x>top){
+        cout<<"Number of element is less than given position\n"<<endl;
+    }
+    else{
+        cout<<my_stack[x-1]<<" is present at given position\n"<<endl;
+    }
+}
+
+void change()
+{
+    int x,data;
+    cout<<"Enter the position: ";
+    cin>>x;
+    if(x>top){
+        cout<<"Number of element is less than given position\n"<<endl;
+    }
+    else{
+        cout<<"Enter the new element: ";
+        cin>>data;
+        my_stack[x-1] = data;
+        cout<<"Element changed..\n"<<endl;
+    }
+}
+
+void display(int top)
+{
+    if(top==-1){
+        cout<<"Stack is empty\n"<<endl;
+    }
+    else{
+            cout<<"Stack is:"<<endl;
+        for(int i=top;i>=0;i--){
+            cout<<my_stack[i]<<endl;
+        }
+        cout<<"\n"<<endl;
+    }
+}
+
+int main()
+{
+    int n,i=0;
+    cout<<"Size of stack: ";
+    cin>>n;
+    while(i!=9)
+    {
+        cout<<"=== CHOOSE ANY ONE ===\n1: push\n2: pop\n3: display\n4: is empty\n5: is full\n6: peek any element\n7: count\n8: change any element\n9: exit"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>i;
+        switch(i)
+        {
+        case 1:
+            {
+                if(top+1==n){
+                    cout<<"Stack overflow..\n"<<endl;
+                }
+                else{
+                    top = top+1;
+                    push(top);
+                }
+
+                break;
+            }
+        case 2:
+            {
+                pop();
+                break;
+            }
+        case 3:
+            {
+                display(top);
+                break;
+            }
+        case 4:
+            {
+                if(top == -1){
+                    cout<<"YES, Stack is empty\n"<<endl;
+                }
+                else{
+                    cout<<"No\n"<<endl;
+                }
+                break;
+            }
+        case 5:
+            {
+                if(top+1==n){
+                    cout<<"YES, Stack is full\n"<<endl;
+                }
+                else{
+                    cout<<"No\n"<<endl;
+                }
+                break;
+            }
+        case 6:
+            {
+                if(top==-1){
+                    cout<<"Stack is empty\n"<<endl;
+                }
+                else{
+                    int x;
+                    cout<<"Enter the position: ";
+                    cin>>x;
+                    peek(x);
+                }
+                break;
+            }
+        case 7:
+            {
+                if(top==-1){
+                    cout<<"Stack is empty\n";
+                }
+                else{
+                    cout<<"Total number of element in a stack is "<<top+1<<"\n"<<endl;
+                }
+                break;
+            }
+        case 8:
+            {
+                if(top==-1){
+                    cout<<"Stack is empty\n"<<endl;
+                }
+                else{
+                    change();
+                }
+                break;
+            }
+        case 9:
+            break;
+        default:
+            cout<<"Invalid input"<<endl;
+
+        }
+    }
+
+    return 0;
+}
