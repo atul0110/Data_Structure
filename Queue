@@ -1,1 +1,101 @@
+/*************************************************************************************************************************
+//QUEUE IMPLEMENTATION USING ARRAY
+*************************************************************************************************************************/
+
+#include<iostream>
+using namespace std;
+
+int my_queue[100],_front = -1,rear = -1;
+
+void enqueue(int n)
+{
+    if(rear>=n-1){
+        cout<<"Queue Overflow\n"<<endl;
+    }
+    else{
+        int data;
+        cout<<"Enter the element to be inserted: ";
+        cin>>data;
+        if(_front==-1 && rear==-1){
+            _front = rear = 0;
+        }
+        else{
+            rear = rear+1;
+        }
+        my_queue[rear]=data;
+        cout<<"Enqueue Successfully\n"<<endl;
+    }
+}
+
+void dequeue()
+{
+    if(rear==-1){
+        cout<<"Queue Underflow\n"<<endl;
+    }
+    else{
+        if(_front==rear){
+            cout<<"Dequeue Successfully, "<<my_queue[_front]<<" is deleted.."<<endl;
+            _front = rear = -1;
+        }
+        else{
+            cout<<"Dequeue Successfully, "<<my_queue[_front]<<" is deleted.."<<endl;
+            _front = _front+1;
+        }
+    }
+    cout<<"\n";
+}
+
+void display()
+{
+    if(rear == -1){
+        cout<<"Queue is empty\n"<<endl;
+    }
+    else{
+        for(int i=_front;i<=rear;i++){
+            cout<<my_queue[i]<<"\t";
+        }
+        cout<<"\n"<<endl;
+    }
+}
+
+int main()
+{
+    int n,i=0;
+    cout<<"Enter max size: ";
+    cin>>n;
+    while(i!=4)
+    {
+        cout<<"=== SELECT ANY ONE ==="<<endl;
+        cout<<"1: Enqueue\n2: Dequeue\n3: Display\n4: Exit"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>i;
+        switch(i)
+        {
+        case 1:
+            {
+                enqueue(n);
+                break;
+            }
+        case 2:
+            {
+                dequeue();
+                break;
+            }
+        case 3:
+            {
+                display();
+                break;
+            }
+        case 4:
+            break;
+        default:
+            cout<<"Invalid input\n"<<endl;
+        }
+    }
+}
+
+
+/*************************************************************************************************************************
+//QUEUE IMPLEMENTATION USING LINKED LIST
+*************************************************************************************************************************/
 
