@@ -1,5 +1,5 @@
 /*************************************************************************************************************************
-//QUEUE IMPLEMENTATION USING ARRAY
+//LINEAR QUEUE IMPLEMENTATION USING ARRAY
 *************************************************************************************************************************/
 
 #include<iostream>
@@ -96,7 +96,7 @@ int main()
 
 
 /*************************************************************************************************************************
-//QUEUE IMPLEMENTATION USING LINKED LIST
+//LINEAR QUEUE IMPLEMENTATION USING LINKED LIST
 *************************************************************************************************************************/
 
 
@@ -199,3 +199,128 @@ struct Node
      }
      return 0;
  }
+
+
+/*************************************************************************************************************************
+//CIRCULAR QUEUE IMPLEMENTATION USING ARRAY
+*************************************************************************************************************************/
+
+
+ #include<iostream>
+ using namespace std;
+
+ int my_queue[100],_front=-1,rear=-1;
+
+ void enQueue(int n)
+ {
+     if(_front==0 && rear==n-1){
+        cout<<"Queue overflow\n"<<endl;
+     }
+     else if(_front==rear+1){
+        cout<<"Queue overflow\n"<<endl;
+     }
+     else{
+        if(_front==-1 && rear==-1){
+        _front = rear = 0;
+        }
+        else if(_front!=0 && rear==n-1){
+            rear = 0;
+        }
+        else{
+            rear = rear+1;
+        }
+        int data;
+        cout<<"Enter an element: ";
+        cin>>data;
+        my_queue[rear]=data;
+        cout<<"EnQueue successfully..\n"<<endl;
+     }
+ }
+
+ void deQueue(int n)
+ {
+     if(_front==-1 && rear==-1){
+        cout<<"Queue Underflow..\n"<<endl;
+     }
+     else{
+        if(_front==rear){
+            cout<<"deQueue successfully, "<<my_queue[_front]<<" is deleted\n"<<endl;
+            _front = rear = -1;
+        }
+        else if(_front==n-1){
+            cout<<"deQueue successfully, "<<my_queue[_front]<<" is deleted\n"<<endl;
+            _front=0;
+        }
+        else{
+            cout<<"deQueue successfully, "<<my_queue[_front]<<" is deleted\n"<<endl;
+            _front = _front+1;
+        }
+     }
+ }
+
+ void display(int n)
+ {
+     if(_front==-1 && rear==-1){
+        cout<<"Queue is empty..\n"<<endl;
+     }
+     else{
+        if(_front>rear){
+            for(int i=_front;i<=n-1;i++){
+                cout<<my_queue[i]<<"\t";
+            }
+            for(int i=0;i<=rear;i++){
+                cout<<my_queue[i]<<"\t";
+            }
+        }
+        else{
+            for(int i=_front;i<=rear;i++){
+                cout<<my_queue[i]<<"\t";
+            }
+        }
+        cout<<"\n"<<endl;
+     }
+ }
+
+ int main()
+ {
+     int i=0,n;
+     cout<<"Enter the max size: ";
+     cin>>n;
+     while(i!=4)
+     {
+         cout<<"++++ SELECT ANY ONE ++++"<<endl;
+         cout<<"1: EnQueue\n2: DeQueue\n3: display\n4: exit"<<endl;
+         cout<<"Enter your choice: ";
+         cin>>i;
+         switch(i)
+         {
+         case 1:
+            {
+                enQueue(n);
+                break;
+            }
+         case 2:
+            {
+                deQueue(n);
+                break;
+            }
+         case 3:
+            {
+                display(n);
+                break;
+            }
+         case 4:
+            break;
+         default:
+            cout<<"Invalid Number..\n"<<endl;
+
+         }
+     }
+     return 0;
+ }
+ 
+ 
+/*************************************************************************************************************************
+//CIRCULAR QUEUE IMPLEMENTATION USING LINKED LIST
+**************************************************************************************************************************/
+
