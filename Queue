@@ -324,3 +324,113 @@ struct Node
 //CIRCULAR QUEUE IMPLEMENTATION USING LINKED LIST
 **************************************************************************************************************************/
 
+
+ #include<iostream>
+ using namespace std;
+
+ struct Node
+ {
+     int data;
+     struct Node* next;
+ };
+
+ struct Node* _front = NULL;
+ struct Node* rear = NULL;
+
+ void enQueue()
+ {
+     struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+     if(new_node==NULL){
+        cout<<"Queue Overflow..\n"<<endl;
+     }
+     else{
+        int data;
+        cout<<"Enter an element: ";
+        cin>>data;
+        new_node->data = data;
+        if(_front==NULL && rear==NULL){
+            _front = new_node;
+            rear = new_node;
+            new_node->next = new_node;
+        }
+        else{
+            rear->next = new_node;
+            rear = new_node;
+            new_node->next = _front;
+        }
+        cout<<"EnQueue successfully done..\n"<<endl;
+     }
+
+ }
+
+ void deQueue()
+ {
+     if(_front==NULL){
+        cout<<"Queue Underflow..\n"<<endl;
+     }
+     else{
+            if(_front==rear){
+                cout<<"DeQueue successfully done, "<<_front->data<<" is deleted..\n"<<endl;
+                _front = rear =NULL;
+            }
+            else{
+                struct Node* ptr = _front;
+                _front = _front->next;
+                ptr->next=NULL;
+                rear->next=_front;
+                cout<<"DeQueue successfully done, "<<ptr->data<<" is deleted..\n"<<endl;
+            }
+     }
+ }
+
+ void display()
+ {
+     if(_front==NULL & rear==NULL){
+        cout<<"Empty Queue..\n"<<endl;
+     }
+     else{
+        struct Node* ptr = _front;
+        cout<<"Queue is:"<<endl;
+        while(ptr->next!=_front){
+                cout<<ptr->data<<"\t";
+                ptr = ptr->next;
+        }
+        cout<<ptr->data<<"\n"<<endl;
+     }
+ }
+
+ int main()
+ {
+     int n=0;
+     while(n!=4)
+     {
+         cout<<"==== SELECT ANY ONE ===="<<endl;
+         cout<<"1: EnQueue\n2: DeQueue\n3: display\n4: exit"<<endl;
+         cout<<"Enter your choice: ";
+         cin>>n;
+         switch(n)
+         {
+         case 1:
+            {
+                enQueue();
+                break;
+            }
+         case 2:
+            {
+                deQueue();
+                break;
+            }
+         case 3:
+            {
+                display();
+                break;
+            }
+         case 4:
+            break;
+         default:
+            cout<<"Invalid input..\n"<<endl;
+         }
+     }
+     return 0;
+
+ }
