@@ -36,3 +36,48 @@ int main()
     }
     return 0;
 }
+
+
+/********************************************************************************************
+//BINARY SEARCH
+********************************************************************************************/
+
+#include <iostream>
+using namespace std;
+
+int bin_search(int arr[],int data,int start_pos,int end_pos)
+{
+    if(start_pos>end_pos){
+        return -1;
+    }
+    else{
+        int mid=(start_pos+end_pos)/2;
+        if(arr[mid]==data){
+            return mid;
+        }
+        else{
+            if(data>arr[mid]){
+            bin_search(arr,data,mid+1,end_pos);
+                }
+            else{
+                bin_search(arr,data,start_pos,mid);
+                }
+            }
+        }
+}
+int main()
+{
+    int arr[10]={1,2,3,4,5,6,7,8,9,10},data;
+    cout<<"Enter the element to be search: ";
+    cin>>data;
+    int n = sizeof(arr)/sizeof(arr[0]);
+    int pos = bin_search(arr,data,0,n-1);
+    if(pos==-1){
+        cout<<"Element not found..";
+    }
+    else{
+        cout<<"Element found at "<<pos;
+    }
+
+    return 0;
+}
