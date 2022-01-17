@@ -78,3 +78,35 @@ int main()
 /**********************************************************************************************************************
 //INSERTION SORT
 **********************************************************************************************************************/
+
+#include<iostream>
+using namespace std;
+
+void insert_sort(int arr[],int n)
+{
+    for(int i=1;i<=n;i++){
+        for(int j=i;j>0;j--){
+            if(arr[j]<arr[j-1]){
+                int temp = arr[j-1];
+                arr[j-1]=arr[j];
+                arr[j]=temp;
+            }
+        }
+    }
+    cout<<"\nSorted array:"<<endl;
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<"\t";
+    }
+}
+
+int main()
+{
+    int arr[]={21,3,32,45,345,4,3,66,22,84,34,23};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    cout<<"Unsorted array:"<<endl;
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<"\t";
+    }
+    insert_sort(arr,n);
+    return 0;
+}
