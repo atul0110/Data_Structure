@@ -119,7 +119,7 @@ int main()
 #include<iostream>
 using namespace std;
 
-int partition_pivot(int arr[],int l,int r)
+int partition_pivot(int arr[],int l,int r)     //IF PIVOT ELEMENT IS RIGHTMOST
 {
     int i = l-1;
     int pi = arr[r];
@@ -135,6 +135,24 @@ int partition_pivot(int arr[],int l,int r)
     arr[i+1] = arr[r];
     arr[r] = t;
     return i+1;
+}
+
+int partition1(int arr[],int l,int r)   // IF PIVOT ELEMENT IS LEFTMOST
+{
+    int pi = arr[l];
+    int i = r+1;
+    for(int j = r;j>l;j--){
+        if(arr[j]>pi){
+            i--;
+            int temp = arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+    int t = arr[i-1];
+    arr[i-1]= arr[l];
+    arr[l]=t;
+    return i-1;
 }
 
 void quick_sort(int arr[],int l,int r)
