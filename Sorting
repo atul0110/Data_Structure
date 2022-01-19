@@ -113,7 +113,7 @@ int main()
 
 
 /**********************************************************************************************************************
-//QUICK SORT (Best sorting algorithm)
+//QUICK SORT (Best sorting algorithm) avg and best time complexity is n(logn) and worst case time complexity is log(n2)
 **********************************************************************************************************************/
 
 #include<iostream>
