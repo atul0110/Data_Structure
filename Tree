@@ -6,6 +6,7 @@
      /
     4
 */
+//Above tree have been implemented through code given below
 
 #include<iostream>
 using namespace std;
