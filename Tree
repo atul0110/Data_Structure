@@ -36,4 +36,50 @@ int main()
 }
 
 
+/*************************************************************************************************
+//BINARY TREE IMPLEMENTATION
+*************************************************************************************************/
+
+#include<iostream>
+using namespace std;
+
+struct Node
+{
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+struct Node* create()
+{
+    int i;
+    cout<<"Enter 1 for insert the new node and 0 to exit\nEnter your choice:";
+    cin>>i;
+    if(i==0){
+        return NULL;
+    }
+    else if(i==1){
+        int data;
+        struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
+        cout<<"Enter the node:";
+        cin>>data;
+        new_node->data = data;
+        cout<<"For left child of "<<data<<endl;
+        new_node->left = create();
+        cout<<"Fof right node of"<<data<<endl;
+        new_node->right = create();
+        return new_node;
+    }
+    else{
+        cout<<"Invalid Choice, Enter correct one.."<<endl;
+        create();
+    }
+}
+
+int main()
+{
+    struct Node* root = create();
+    return 0;
+}
+
 
